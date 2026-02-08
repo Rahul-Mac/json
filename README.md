@@ -68,11 +68,37 @@ $isValid = Json::of('{"foo":"bar"}')->isValid(); // true
 $isValid = Json::of('{invalid json}')->isValid(); // false
 ```
 
+### Accessors
+
+Use `get()` with dot notation to access nested values:
+
+```php
+use Rahulmac\Json\Json;
+
+$decoder = Json::of('{"user":{"id":123,"name":"Alice","active":true,"balance":99.5}}');
+
+$id = $decoder->get('user.id');          // 123
+$name = $decoder->get('user.name');      // "Alice"
+$status = $decoder->get('user.active');  // true
+$unknown = $decoder->get('user.unknown', 'default'); // "default"
+```
+
+For type-safety, use can use type-safe helpers that fetch a value and cast it to the requested type:
+
+```php
+$age     = $decoder->asInt('user.id');           // 123
+$balance = $decoder->asFloat('user.balance');   // 99.5
+$name    = $decoder->asString('user.name');     // "Alice"
+$active  = $decoder->asBool('user.active');     // true
+
+$roles   = $decoder->asArray('user.roles', []); // [] if missing
+```
+
 > [!NOTE]
 > While encoding/decoding use `addFlags()` to append flags and `withFlags()` to override them.
 
 > [!WARNING]
-> All encoding/decoding methods throw `\JsonException`
+> All encoding/decoding/accessor methods throw `\JsonException` if an invalid JSON is received.
 
 # License
 

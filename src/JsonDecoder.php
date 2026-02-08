@@ -6,7 +6,7 @@ use JsonException;
 
 final class JsonDecoder
 {
-    private mixed $value;
+    private array $value;
 
     public function __construct(
         private string $json,
@@ -46,14 +46,6 @@ final class JsonDecoder
         return $this->addFlags(JSON_OBJECT_AS_ARRAY)->parse();
     }
 
-    /**
-     * @throws JsonException
-     */
-    public function toObject(): object
-    {
-        return (object) $this->parse();
-    }
-
     public function isValid(): bool
     {
         if (PHP_VERSION_ID >= 80300) {
@@ -67,5 +59,69 @@ final class JsonDecoder
         } catch (JsonException) {
             return false;
         }
+    }
+
+    /**
+     * @throws JsonException
+     */
+    public function get(string $key, mixed $default = null): mixed
+    {
+        if (! isset($this->value)) {
+            $this->value = $this->toArray();
+        }
+
+        $value = $this->value;
+
+        $segments = \explode('.', $key);
+
+        foreach ($segments as $segment) {
+            if (\is_array($value) && \array_key_exists($segment, $value)) {
+                $value = $value[$segment];
+            } else {
+                return $default;
+            }
+        }
+
+        return $value;
+    }
+
+    /**
+     * @throws JsonException
+     */
+    public function asInt(string $key, int $default = 0): int
+    {
+        return (int) $this->get($key, $default);
+    }
+
+    /**
+     * @throws JsonException
+     */
+    public function asFloat(string $key, float $default = 0.0): float
+    {
+        return (float) $this->get($key, $default);
+    }
+
+    /**
+     * @throws JsonException
+     */
+    public function asString(string $key, string $default = ''): string
+    {
+        return (string) $this->get($key, $default);
+    }
+
+    /**
+     * @throws JsonException
+     */
+    public function asBool(string $key, bool $default = false): bool
+    {
+        return (bool) $this->get($key, $default);
+    }
+
+    /**
+     * @throws JsonException
+     */
+    public function asArray(string $key, array $default = []): array
+    {
+        return (array) $this->get($key, $default);
     }
 }
