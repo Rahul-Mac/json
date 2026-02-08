@@ -33,7 +33,7 @@ final class JsonEncoderTest extends TestCase
     public function testWithDepthReturnsNewInstance(): void
     {
         $encoder = new JsonEncoder(['foo' => 'bar'], 512, 0);
-        $new     = $encoder->withDepth(10);
+        $new = $encoder->withDepth(10);
 
         $this->assertNotSame($encoder, $new);
         $this->assertSame('{"foo":"bar"}', $new->stringify());
@@ -45,7 +45,7 @@ final class JsonEncoderTest extends TestCase
     public function testWithFlagsOverridesExistingFlags(): void
     {
         $encoder = new JsonEncoder(['foo' => 'bar'], 512, JSON_PRETTY_PRINT);
-        $new     = $encoder->withFlags(0);
+        $new = $encoder->withFlags(0);
 
         $this->assertSame('{"foo":"bar"}', $new->stringify());
     }
@@ -56,7 +56,7 @@ final class JsonEncoderTest extends TestCase
     public function testAddFlagsMergesFlags(): void
     {
         $encoder = new JsonEncoder(['foo' => 'bar'], 512, 0);
-        $new     = $encoder->addFlags(JSON_PRETTY_PRINT);
+        $new = $encoder->addFlags(JSON_PRETTY_PRINT);
 
         $this->assertStringContainsString("{\n    \"foo\": \"bar\"\n}", $new->stringify());
     }
@@ -66,7 +66,7 @@ final class JsonEncoderTest extends TestCase
         $this->expectException(\JsonException::class);
 
         $resource = \fopen('php://memory', 'r');
-        $encoder  = new JsonEncoder($resource, 512, 0);
+        $encoder = new JsonEncoder($resource, 512, 0);
 
         $encoder->stringify();
     }
