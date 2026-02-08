@@ -18,6 +18,30 @@ final class JsonDecoder
     /**
      * @throws JsonException
      */
+    private function fetch(string $key): mixed
+    {
+        if (! isset($this->value)) {
+            $this->value = $this->toArray();
+        }
+
+        $value = $this->value;
+
+        $segments = \explode('.', $key);
+
+        foreach ($segments as $segment) {
+            if (\is_array($value) && \array_key_exists($segment, $value)) {
+                $value = $value[$segment];
+            } else {
+                throw new \InvalidArgumentException("Invalid key [$key].");
+            }
+        }
+
+        return $value;
+    }
+
+    /**
+     * @throws JsonException
+     */
     public function parse(): mixed
     {
         return \json_decode(json: $this->json, depth: $this->depth, flags: $this->flags | JSON_THROW_ON_ERROR);
@@ -66,23 +90,25 @@ final class JsonDecoder
      */
     public function get(string $key, mixed $default = null): mixed
     {
-        if (! isset($this->value)) {
-            $this->value = $this->toArray();
+        try {
+            return $this->fetch($key);
+        } catch (\InvalidArgumentException) {
+            return $default;
         }
+    }
 
-        $value = $this->value;
+    /**
+     * @throws JsonException
+     */
+    public function has(string $key): bool
+    {
+        try {
+            $this->fetch($key);
 
-        $segments = \explode('.', $key);
-
-        foreach ($segments as $segment) {
-            if (\is_array($value) && \array_key_exists($segment, $value)) {
-                $value = $value[$segment];
-            } else {
-                return $default;
-            }
+            return true;
+        } catch (\InvalidArgumentException) {
+            return false;
         }
-
-        return $value;
     }
 
     /**

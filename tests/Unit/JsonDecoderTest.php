@@ -216,4 +216,15 @@ final class JsonDecoderTest extends TestCase
         $this->assertSame([], $this->decoder->asArray('meta.unknown'));
         $this->assertSame(['bar'], $this->decoder->asArray('meta.unknown', ['bar']));
     }
+
+    /**
+     * @throws \JsonException
+     */
+    public function testHas(): void
+    {
+        $this->assertTrue($this->decoder->has('id'));
+        $this->assertTrue($this->decoder->has('meta.age'));
+        $this->assertFalse($this->decoder->has('unknown'));
+        $this->assertFalse($this->decoder->has('meta.unknown'));
+    }
 }
