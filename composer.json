@@ -1,0 +1,25 @@
+{
+    "name": "rahul/json",
+    "description": "json is a fluent, object-oriented wrapper around PHP’s native JSON functions.",
+    "type": "library",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "Rahul\\Json\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Rahulmac\\Json\\Tests\\": "tests/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Rahul Mac",
+            "email": "rahulmacwan14@gmail.com"
+        }
+    ],
+    "require-dev": {
+        "phpunit/phpunit": "^9"
+    }
+}
