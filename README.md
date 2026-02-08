@@ -55,12 +55,6 @@ To decode as an array:
 $array = Json::of('{"foo":"bar"}')->toArray();
 ```
 
-To decode as an object:
-
-```php
-$object = Json::of('{"foo":"bar"}')->toObject();
-```
-
 To validate:
 
 ```php
@@ -77,9 +71,9 @@ use Rahulmac\Json\Json;
 
 $decoder = Json::of('{"user":{"id":123,"name":"Alice","active":true,"balance":99.5}}');
 
-$id = $decoder->get('user.id');          // 123
-$name = $decoder->get('user.name');      // "Alice"
-$status = $decoder->get('user.active');  // true
+$id      = $decoder->get('user.id');          // 123
+$name    = $decoder->get('user.name');      // "Alice"
+$status  = $decoder->get('user.active');  // true
 $unknown = $decoder->get('user.unknown', 'default'); // "default"
 ```
 
