@@ -1,3 +1,10 @@
+<p align="center">
+    <a href="https://packagist.org/packages/rahulmac/json" target="_blank"><img alt="Packagist Version" src="https://img.shields.io/packagist/v/rahulmac/json"></a>
+    <a href="https://github.com/Rahul-Mac/json/blob/main/LICENSE" target="_blank"><img alt="GitHub License" src="https://img.shields.io/github/license/Rahul-Mac/json"></a>
+    <a href="https://github.com/Rahul-Mac/json/actions/workflows/test.yml" target="_blank"><img alt="Tests" src="https://github.com/Rahul-Mac/json/actions/workflows/test.yml/badge.svg"></a>
+</p>
+
+
 # json
 
 `json` is a fluent, object-oriented wrapper around PHP’s native JSON functions.
