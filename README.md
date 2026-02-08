@@ -68,11 +68,12 @@ $isValid = Json::of('{"foo":"bar"}')->isValid(); // true
 $isValid = Json::of('{invalid json}')->isValid(); // false
 ```
 
-> [! NOTE]
+> [!NOTE]
 > While encoding/decoding use `addFlags()` to append flags and `withFlags()` to override them.
 
-> [! WARNING]
+> [!WARNING]
 > All encoding/decoding methods throw `\JsonException`
+
 # License
 
 `json` is open-sourced software licensed under the [MIT license](LICENSE).

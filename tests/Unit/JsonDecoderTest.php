@@ -51,7 +51,7 @@ final class JsonDecoderTest extends TestCase
     public function testWithDepthReturnsNewInstance(): void
     {
         $decoder = new JsonDecoder('{"foo":"bar"}', 512, 0);
-        $new     = $decoder->withDepth(10);
+        $new = $decoder->withDepth(10);
 
         $this->assertNotSame($decoder, $new);
         $this->assertSame(['foo' => 'bar'], $new->toArray());
@@ -63,7 +63,7 @@ final class JsonDecoderTest extends TestCase
     public function testWithFlagsOverridesFlags(): void
     {
         $decoder = new JsonDecoder('{"foo":"bar"}', 512, JSON_OBJECT_AS_ARRAY);
-        $new     = $decoder->withFlags(0);
+        $new = $decoder->withFlags(0);
 
         $this->assertIsObject($new->parse());
     }
@@ -74,7 +74,7 @@ final class JsonDecoderTest extends TestCase
     public function testAddFlagsMergesFlags(): void
     {
         $decoder = new JsonDecoder('{"foo":"bar"}', 512, 0);
-        $new     = $decoder->addFlags(JSON_OBJECT_AS_ARRAY);
+        $new = $decoder->addFlags(JSON_OBJECT_AS_ARRAY);
 
         $this->assertSame(['foo' => 'bar'], $new->parse());
     }
