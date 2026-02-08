@@ -62,7 +62,7 @@ $isValid = Json::of('{"foo":"bar"}')->isValid(); // true
 $isValid = Json::of('{invalid json}')->isValid(); // false
 ```
 
-### Accessors
+### Accessors & Key-Existence
 
 Use `get()` with dot notation to access nested values:
 
@@ -88,11 +88,20 @@ $active  = $decoder->asBool('user.active');     // true
 $roles   = $decoder->asArray('user.roles', []); // [] if missing
 ```
 
+To determine if a key exists:
+
+```php
+Json::of('{"foo":"bar"}')->has('foo'); // true
+Json::of('{"foo":"bar"}')->has('baz'); // false
+Json::of('{"foo":{"bar":"baz"}')->has('foo.bar'); // true
+Json::of('{"foo":{"bar":"baz"}')->has('foo.baz'); // false
+```
+
 > [!NOTE]
 > While encoding/decoding use `addFlags()` to append flags and `withFlags()` to override them.
 
 > [!WARNING]
-> All encoding/decoding/accessor methods throw `\JsonException` if an invalid JSON is received.
+> All encoding/decoding/accessor/key-existence methods throw `\JsonException` if an invalid JSON is received.
 
 # License
 
