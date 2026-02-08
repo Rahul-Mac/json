@@ -27,6 +27,7 @@ final class JsonDecoderTest extends TestCase
 
         parent::setUp();
     }
+
     /**
      * @throws \JsonException
      */
