@@ -2,9 +2,9 @@
 
 namespace Rahulmac\Json\Tests\Unit;
 
-use Rahul\Json\Json;
-use Rahul\Json\JsonDecoder;
-use Rahul\Json\JsonEncoder;
+use Rahulmac\Json\Json;
+use Rahulmac\Json\JsonDecoder;
+use Rahulmac\Json\JsonEncoder;
 use Rahulmac\Json\Tests\TestCase;
 
 final class JsonTest extends TestCase

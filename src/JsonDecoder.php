@@ -1,6 +1,6 @@
 <?php
 
-namespace Rahul\Json;
+namespace Rahulmac\Json;
 
 use JsonException;
 
