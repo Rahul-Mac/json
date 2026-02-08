@@ -19,7 +19,7 @@ composer require rahulmac/json
 Use `Json::from()` to encode PHP values into JSON.
 
 ```php
-use Rahul\Json\Json;
+use Rahulmac\Json\Json;
 
 $json = Json::from(['foo' => 'bar'])->stringify();
 ```
@@ -44,7 +44,7 @@ $json = Json::from($data)
 Use `Json::of()` to decode a JSON string.
 
 ```php
-use Rahul\Json\Json;
+use Rahulmac\Json\Json;
 
 $value = Json::of('{"foo":"bar"}')->parse();
 ```
